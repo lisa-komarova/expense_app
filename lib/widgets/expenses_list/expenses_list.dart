@@ -17,7 +17,7 @@ class ExpensesList extends StatelessWidget {
           key: ValueKey(expensesList[index]),
           direction: DismissDirection.endToStart,
           background: Container(
-            color: Colors.red,
+            color: Theme.of(context).colorScheme.error,
             child: const Padding(
               padding: EdgeInsets.all(15),
               child: Row(
