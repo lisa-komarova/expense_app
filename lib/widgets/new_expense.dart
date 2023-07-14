@@ -15,7 +15,7 @@ class _NewExpenseState extends State<NewExpense> {
   final _textController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime? _selectedDate;
-  Category _selectedCategory = Category.leisure;
+  ExpenseCategory _selectedCategory = ExpenseCategory.leisure;
   void _presentDatePicker() async {
     var now = DateTime.now();
     var firstDate = DateTime(now.year - 1, now.month, now.day);
@@ -115,14 +115,14 @@ class _NewExpenseState extends State<NewExpense> {
             children: [
               DropdownButton(
                   value: _selectedCategory,
-                  items: Category.values
+                  items: ExpenseCategory.values
                       .map((e) => DropdownMenuItem(
                           value: e, child: Text(e.name.toString())))
                       .toList(),
                   onChanged: (value) {
                     if (value == null) return;
                     setState(() {
-                      _selectedCategory = value as Category;
+                      _selectedCategory = value as ExpenseCategory;
                     });
                   }),
               const Spacer(),

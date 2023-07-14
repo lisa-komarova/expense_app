@@ -1,5 +1,5 @@
-import 'package:expense_app/models/expense.dart' as model;
 import 'package:expense_app/models/expense.dart';
+import 'package:expense_app/widgets/chart/chart.dart';
 import 'package:expense_app/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_app/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
@@ -12,22 +12,22 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  final List<model.Expense> _registeredExpenses = [
-    model.Expense(
+  final List<Expense> _registeredExpenses = [
+    Expense(
         title: 'title',
         amount: 1,
         date: DateTime.now(),
-        category: model.Category.food),
-    model.Expense(
+        category: ExpenseCategory.food),
+    Expense(
         title: 'title1',
         amount: 1,
         date: DateTime.now(),
-        category: model.Category.travel),
-    model.Expense(
+        category: ExpenseCategory.travel),
+    Expense(
         title: 'title2',
         amount: 1,
         date: DateTime.now(),
-        category: model.Category.food),
+        category: ExpenseCategory.food),
   ];
 
   void _openAddExpenseOverlay() {
@@ -72,7 +72,7 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Column(
         children: [
-          const Text("chart"),
+          Chart(expenses: _registeredExpenses),
           Expanded(
               child: _registeredExpenses.isEmpty
                   ? const Center(child: Text('No expenses found'))

@@ -4,12 +4,12 @@ import 'package:uuid/uuid.dart';
 
 final formatter = DateFormat.yMd();
 const uuid = Uuid();
-enum Category { food, travel, leisure, work }
+enum ExpenseCategory { food, travel, leisure, work }
 const categoryItems = {
-  Category.food: Icons.lunch_dining,
-  Category.travel: Icons.flight,
-  Category.leisure: Icons.movie,
-  Category.work: Icons.work,
+  ExpenseCategory.food: Icons.lunch_dining,
+  ExpenseCategory.travel: Icons.flight,
+  ExpenseCategory.leisure: Icons.movie,
+  ExpenseCategory.work: Icons.work,
 };
 
 class Expense {
@@ -23,7 +23,7 @@ class Expense {
   final String title;
   final double amount;
   final DateTime date;
-  final Category category;
+  final ExpenseCategory category;
 
   String get formatedDate {
     return formatter.format(date);
