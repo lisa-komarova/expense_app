@@ -32,7 +32,10 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
-        context: context, builder: (ctx) => NewExpense(_addExpense));
+      isScrollControlled: true,
+        useSafeArea: true,
+        context: context,
+        builder: (ctx) => NewExpense(_addExpense));
   }
 
   void _addExpense(Expense expense) {
@@ -62,6 +65,8 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Expense app'),
@@ -70,18 +75,29 @@ class _ExpensesState extends State<Expenses> {
               onPressed: _openAddExpenseOverlay, icon: const Icon(Icons.add))
         ],
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(
-              child: _registeredExpenses.isEmpty
-                  ? const Center(child: Text('No expenses found'))
-                  : ExpensesList(
-                      expensesList: _registeredExpenses,
-                      onRemoveExpense: _removeExpense,
-                    ))
-        ],
-      ),
+      body: width < height
+          ? Column(
+              children: [
+                Chart(expenses: _registeredExpenses),
+                Expanded(
+                    child: _registeredExpenses.isEmpty
+                        ? const Center(child: Text('No expenses found'))
+                        : ExpensesList(
+                            expensesList: _registeredExpenses,
+                            onRemoveExpense: _removeExpense,
+                          ))
+              ],
+            )
+          : Row(children: [
+              Expanded(child: Chart(expenses: _registeredExpenses)),
+              Expanded(
+                  child: _registeredExpenses.isEmpty
+                      ? const Center(child: Text('No expenses found'))
+                      : ExpensesList(
+                          expensesList: _registeredExpenses,
+                          onRemoveExpense: _removeExpense,
+                        ))
+            ]),
     );
   }
 }
